@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['excel_file'])) {
         <div class="card-body">
             <div class="alert alert-info">
                 <strong>Cấu trúc file Excel chuẩn:</strong><br>
-                * Cột A: Loại câu hỏi (trac_nghiem, dung_sai, dien_khuyet, noi_tu)<br>
+                * Cột A: Loại câu hỏi (trac_nghiem, dung_sai, dien_khuyet)<br>
                 * Cột B: Nội dung câu hỏi<br>
                 * Cột C, D, E, F: Lần lượt là Đáp án A, B, C, D<br>
                 * Cột G: Đáp án đúng (Ghi A, B, C, D hoặc nội dung đáp án tự luận)<br>

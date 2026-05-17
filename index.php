@@ -22,11 +22,11 @@ if ($page === 'home') {
         }
     }
 
-    // ---- HIỂN THỊ TRANG CHỦ CHO KHÁCH (CHƯA ĐĂNG NHẬP) ----
+    // ---- HIỂN THỊ TRANG CHỦ CHO  (CHƯA ĐĂNG NHẬP) ----
     echo '<div class="row text-center mt-5">
             <div class="col-md-12">
                 <h1 class="text-primary">Hệ Thống Thi Trắc Nghiệm & Tự Luận</h1>
-                <p class="lead">Hỗ trợ 4 loại câu hỏi: Trắc nghiệm, Đúng/Sai, Điền khuyết, Nối từ.</p>
+                <p class="lead">Hỗ trợ 4 loại câu hỏi: Trắc nghiệm, Đúng/Sai, Điền khuyết, tự luận ngắn.</p>
                 <a href="index.php?page=student_exams" class="btn btn-success btn-lg mt-3">Bắt đầu làm bài</a>
             </div>
           </div>';

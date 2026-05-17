@@ -74,7 +74,7 @@ $questions = $stmt->fetchAll();
                         <input type="text" name="answers[<?php echo $q['id']; ?>]" class="form-control" placeholder="Nhập câu trả lời của bạn vào đây...">
                         
                     <?php elseif ($q['question_type'] == 'noi_tu'): ?>
-                        <textarea name="answers[<?php echo $q['id']; ?>]" class="form-control" rows="2" placeholder="Ví dụ: 1-A, 2-B..."></textarea>
+                        <textarea name="answers[<?php echo $q['id']; ?>]" class="form-control" rows="2" placeholder="Nhập câu trả lời của bạn vào đây..."></textarea>
                     <?php endif; ?>
 
                 </div>
