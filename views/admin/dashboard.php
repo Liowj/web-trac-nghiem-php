@@ -4,8 +4,7 @@
             <a href="index.php?page=admin" class="list-group-item list-group-item-action active">Bảng điều khiển</a>
             <a href="index.php?page=admin_exams" class="list-group-item list-group-item-action">📝 Quản lý Kỳ thi</a>
             <a href="index.php?page=admin_results" class="btn btn-info btn-lg m-2 text-white fw-bold">📊 Xem Bảng Điểm</a>
-            <a href="#" class="list-group-item list-group-item-action">❓ Quản lý Câu hỏi</a>
-            <a href="#" class="list-group-item list-group-item-action">📊 Xem Kết quả</a>
+            
         </div>
     </div>
     
