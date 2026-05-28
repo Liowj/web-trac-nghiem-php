@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2026 at 08:32 AM
+-- Generation Time: May 28, 2026 at 09:15 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -34,15 +34,17 @@ CREATE TABLE `exams` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `max_attempts` int(11) DEFAULT 1 COMMENT 'Số lần làm bài tối đa',
   `start_time` datetime DEFAULT NULL COMMENT 'Thời gian mở đề',
-  `end_time` datetime DEFAULT NULL COMMENT 'Thời gian đóng đề'
+  `end_time` datetime DEFAULT NULL COMMENT 'Thời gian đóng đề',
+  `subject_id` int(11) DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `exams`
 --
 
-INSERT INTO `exams` (`id`, `title`, `duration`, `created_at`, `max_attempts`, `start_time`, `end_time`) VALUES
-(6, 'Lập trình C', 45, '2026-05-23 10:59:39', 2, '2026-05-15 17:59:00', '2026-05-30 17:59:00');
+INSERT INTO `exams` (`id`, `title`, `duration`, `created_at`, `max_attempts`, `start_time`, `end_time`, `subject_id`, `created_by`) VALUES
+(6, 'Lập trình C', 45, '2026-05-23 10:59:39', 2, '2026-05-15 17:59:00', '2026-05-30 17:59:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -123,6 +125,28 @@ CREATE TABLE `results` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subjects`
+--
+
+CREATE TABLE `subjects` (
+  `id` int(11) NOT NULL,
+  `subject_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_subjects`
+--
+
+CREATE TABLE `teacher_subjects` (
+  `teacher_id` int(11) NOT NULL,
+  `subject_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -175,6 +199,19 @@ ALTER TABLE `results`
   ADD KEY `exam_id` (`exam_id`);
 
 --
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teacher_subjects`
+--
+ALTER TABLE `teacher_subjects`
+  ADD PRIMARY KEY (`teacher_id`,`subject_id`),
+  ADD KEY `fk_subject_new` (`subject_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -210,6 +247,12 @@ ALTER TABLE `results`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -231,6 +274,13 @@ ALTER TABLE `questions`
 ALTER TABLE `results`
   ADD CONSTRAINT `results_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `results_ibfk_2` FOREIGN KEY (`exam_id`) REFERENCES `exams` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `teacher_subjects`
+--
+ALTER TABLE `teacher_subjects`
+  ADD CONSTRAINT `fk_subject_new` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_teacher_new` FOREIGN KEY (`teacher_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
