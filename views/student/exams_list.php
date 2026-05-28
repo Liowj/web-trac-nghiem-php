@@ -1,6 +1,10 @@
 <?php
-// Lấy danh sách tất cả các kỳ thi từ Database
-$stmt = $conn->query("SELECT * FROM exams ORDER BY id DESC");
+// SỬA CÂU SQL CŨ THÀNH CÂU SQL DƯỚI ĐÂY:
+$stmt = $conn->query("SELECT e.*, COUNT(q.id) AS total_questions 
+                      FROM exams e 
+                      LEFT JOIN questions q ON e.id = q.exam_id 
+                      GROUP BY e.id 
+                      ORDER BY e.id DESC");
 $exams = $stmt->fetchAll();
 ?>
 
@@ -14,11 +18,17 @@ $exams = $stmt->fetchAll();
                     <div class="card shadow-sm h-100 border-primary border-top border-3">
                         <div class="card-body text-center d-flex flex-column justify-content-center">
                             <h5 class="card-title text-dark fw-bold mb-3"><?php echo htmlspecialchars($exam['title']); ?></h5>
-                            <p class="card-text text-danger mb-4">
-                                <strong>⏳ Thời gian:</strong> <?php echo $exam['duration']; ?> phút
+                            
+                            <p class="card-text text-danger mb-1">
+                                <strong>⏳ Thời gian làm:</strong> <?php echo $exam['duration']; ?> phút
                             </p>
-                            <a href="index.php?page=take_exam&id=<?php echo $exam['id']; ?>" class="btn btn-success mt-auto w-100 fw-bold">
-                                🚀 Bắt đầu làm bài
+                            
+                            <p class="card-text text-primary mb-4">
+                                <strong>📝 Số câu hỏi:</strong> <?php echo $exam['total_questions']; ?> câu
+                            </p>
+                            
+                            <a href="index.php?page=exam_info&id=<?php echo $exam['id']; ?>" class="btn btn-primary mt-auto w-100 fw-bold">
+                                🔍 Xem thông tin & Vào thi
                             </a>
                         </div>
                     </div>

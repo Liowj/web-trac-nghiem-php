@@ -21,7 +21,9 @@ $questions = $stmt->fetchAll();
     <div class="col-md-8 offset-md-2">
         <div class="card shadow-sm border-primary mb-4 sticky-top" style="top: 10px; z-index: 1000;">
             <div class="card-body text-center bg-light">
+                
                 <h3 class="text-primary fw-bold"><?php echo htmlspecialchars($exam['title']); ?></h3>
+                <h5 class="text-secondary mb-3">📋 Tổng số câu hỏi: <span class="text-dark fw-bold"><?php echo count($questions); ?> câu</span></h5>
                 <h4 class="text-danger fw-bold mb-0">
                     ⏳ Thời gian còn lại: <span id="timer" class="badge bg-danger fs-4 text-white">Đang tải...</span>
                 </h4>
@@ -87,7 +89,15 @@ $questions = $stmt->fetchAll();
         </form>
     </div>
 </div>
-
+<div class="card-body text-center bg-light">
+    <h3 class="text-primary fw-bold"><?php echo htmlspecialchars($exam['title']); ?></h3>
+    
+    <h5 class="text-secondary mb-3">📋 Tổng số câu hỏi: <span class="text-dark fw-bold"><?php echo count($questions); ?> câu</span></h5>
+    
+    <h4 class="text-danger fw-bold mb-0">
+        ⏳ Thời gian còn lại: <span id=\"timer\" class=\"badge bg-danger fs-4 text-white\">Đang tải...</span>
+    </h4>
+</div>
 <script>
     // Lấy thời gian làm bài (phút) từ PHP và đổi ra Giây
     let timeLimitInMinutes = <?php echo (int)$exam['duration']; ?>;
